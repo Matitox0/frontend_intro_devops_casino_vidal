@@ -1,3 +1,6 @@
+Iniciar frontend web
+docker run --rm -p 8080:80 -e BACKEND_HOST=localhost -e BACKEND_PORT=3000 frontend-test
+
 # casino-frontend
 
 SPA Angular 17 (standalone components) del **Casino Online** —
