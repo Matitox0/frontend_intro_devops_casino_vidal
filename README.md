@@ -216,14 +216,15 @@ Lean la pauta oficial (`EP2_Instrucciones y Pauta_Encargo_Estudiante.pdf`) para 
 
 
 
-|HERRAMIENTAS UTILIZADAS
-|----------------|--------------------------------------------------------------|
-| Instancia      | `ec2-frontend` — t3.micro — Amazon Linux 2023|                
-| Subred         | Public (`casino-subnet-public` — 10-0-0-0/20)|
-| Security Group | `sg-frontend` — puerto 8080 para todo el trafico/SSH puerto 22|
-| Route table    | 10.0.0.0/16 para local 0.0.0.0/Igt Casino|
-| Acceso         | http://localhost:8080/|
-| Imagen         | `kripsv/casino-fronted:latest`|
+
+| Herramienta | Detalle |
+| :--- | :--- |
+| Instancia| `ec2-frontend` — `t3.micro` — `Amazon Linux 2023` |
+| Subred|`Public (casino-subnet-public — 10.0.0.0/20)` |
+| Security Group | `sg-frontend` — Puertos `8080` (Tráfico) / `22` (SSH) |
+| Route Table | `10.0.0.0/16` (Local) / `0.0.0.0/0` (Internet Gateway) |
+| Acceso | `http://54.175.46.217:8080/` |
+| Imagen | `kripsv/casino-fronted:latest` |
 
 
 ### GitHub Secrets requeridos
