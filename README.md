@@ -213,3 +213,48 @@ Lean la pauta oficial (`EP2_Instrucciones y Pauta_Encargo_Estudiante.pdf`) para 
 - **Three.js fuera de NgZone**: el loop de animación corre en
   `ngZone.runOutsideAngular()` para no disparar detección de cambios
   en cada frame de requestAnimationFrame.
+
+
+
+|HERRAMIENTAS UTILIZADAS
+|----------------|--------------------------------------------------------------|
+| Instancia      | `ec2-frontend` — t3.micro — Amazon Linux 2023|                
+| Subred         | Public (`casino-subnet-public` — 10-0-0-0/20)|
+| Security Group | `sg-frontend` — puerto 8080 para todo el trafico/SSH puerto 22|
+| Route table    | 10.0.0.0/16 para local 0.0.0.0/Igt Casino|
+| Acceso         | http://localhost:8080/|
+| Imagen         | `kripsv/casino-fronted:latest`|
+
+
+### GitHub Secrets requeridos
+
+| Secret                  | Descripción                   |
+|-------------------------|-------------------------------|
+| `DOCKERHUB_USERNAME`    | Usuario de Docker Hub         |
+| `DOCKERHUB_TOKEN`       | Access Token de Docker Hub    |
+| `AWS_ACCESS_KEY_ID`     | Credencial AWS Academy        |
+| `AWS_SECRET_ACCESS_KEY` | Credencial AWS Academy        |
+| `AWS_SESSION_TOKEN`     | Token de sesion AWS Academy   |
+| `AWS_ACCOUNT_ID`        | ID de la cuenta de aws        |
+| `AWS_REGION`            | Region utilizada              |
+| `BACKEND HOST PRIVATE`  | Ip privada para comunicacion interna |
+| `EC2-FRONTEND-HOST`     | Ip publica para acceso a red  |
+| `EC2-SSH-KEY`           | Llave pem privada             |
+
+
+
+ Arquitectura del Workflow
+
+El pipeline se divide en dos trabajos principales
+
+Build y Push Image:
+Se hace un checkout del codigo
+Se autentica en Docker Hub usando los secrets
+Se construye la imagen usando el Dockerfile multi-stage
+Se sube la imagen al registro con el tag latest
+
+Continuous Deployment (CD):
+Se conecta a la instancia EC2 de AWS mediante SSH.
+Realiza un docker pull de la imagen recién subida.
+Detiene y elimina el contenedor anterior para evitar conflictos de puertos.
+Levanta el nuevo contenedor inyectando las variables de entorno necesarias para el Reverse Proxy de Nginx
