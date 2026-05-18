@@ -215,7 +215,7 @@ Lean la pauta oficial (`EP2_Instrucciones y Pauta_Encargo_Estudiante.pdf`) para 
   en cada frame de requestAnimationFrame.
 
 
-
+## Servicios AWS utilizados
 
 | Herramienta | Detalle |
 | :--- | :--- |
